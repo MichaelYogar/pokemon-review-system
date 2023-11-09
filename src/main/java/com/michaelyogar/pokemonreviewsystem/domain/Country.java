@@ -1,15 +1,19 @@
 package com.michaelyogar.pokemonreviewsystem.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long country_id;
 
     public String name;
+
+    @OneToMany(mappedBy = "country", orphanRemoval = true, cascade = CascadeType.ALL)
+    public List<Owner> owners;
 
     public long getCountryId() {
         return country_id;

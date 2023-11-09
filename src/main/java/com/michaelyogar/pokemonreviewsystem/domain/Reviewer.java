@@ -1,9 +1,10 @@
 package com.michaelyogar.pokemonreviewsystem.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
 public class Reviewer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +13,9 @@ public class Reviewer {
     public String firstName;
 
     public String lastName;
+
+    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Review> reviews;
 
     public long getReviewerId() {
         return reviewer_id;

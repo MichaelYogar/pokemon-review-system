@@ -1,9 +1,8 @@
 package com.michaelyogar.pokemonreviewsystem.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +11,9 @@ public class Owner {
     public String name;
 
     public String gym;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Country country;
 
     public long getOwnerId() {
         return owner_id;

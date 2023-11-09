@@ -1,13 +1,11 @@
 package com.michaelyogar.pokemonreviewsystem.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 public class Pokemon {
@@ -35,4 +33,7 @@ public class Pokemon {
     public void setName(String name) {
         this.name = name;
     }
+
+    @OneToMany(mappedBy = "pokemon", orphanRemoval = true, cascade = CascadeType.ALL)
+    public List<Review> reviews;
 }

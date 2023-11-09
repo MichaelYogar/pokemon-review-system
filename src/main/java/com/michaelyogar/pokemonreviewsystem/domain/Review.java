@@ -1,9 +1,8 @@
 package com.michaelyogar.pokemonreviewsystem.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +11,9 @@ public class Review {
     public String title;
 
     public String text;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Reviewer reviewer;
 
     public long getReviewId() {
         return review_id;
@@ -36,4 +38,8 @@ public class Review {
     public void setText(String text) {
         this.text = text;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_pokemon_id")
+    public Pokemon pokemon;
 }
