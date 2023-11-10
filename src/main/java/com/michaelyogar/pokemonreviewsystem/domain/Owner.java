@@ -6,14 +6,14 @@ import jakarta.persistence.*;
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long owner_id;
+    private long owner_id;
 
-    public String name;
+    private String name;
 
-    public String gym;
+    private String gym;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    public Country country;
+    private Country country;
 
     public long getOwnerId() {
         return owner_id;
@@ -37,5 +37,13 @@ public class Owner {
 
     public void setGym(String gym) {
         this.gym = gym;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }

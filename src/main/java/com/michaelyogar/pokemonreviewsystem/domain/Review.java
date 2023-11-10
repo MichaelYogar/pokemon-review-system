@@ -15,6 +15,10 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     public Reviewer reviewer;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_pokemon_id")
+    public Pokemon pokemon;
+
     public long getReviewId() {
         return review_id;
     }
@@ -39,7 +43,19 @@ public class Review {
         this.text = text;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_pokemon_id")
-    public Pokemon pokemon;
+    public Reviewer getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(Reviewer reviewer) {
+        this.reviewer = reviewer;
+    }
+
+    public Pokemon getPokemon() {
+        return pokemon;
+    }
+
+    public void setPokemon(Pokemon pokemon) {
+        this.pokemon = pokemon;
+    }
 }

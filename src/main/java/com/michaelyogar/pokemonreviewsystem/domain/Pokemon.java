@@ -2,9 +2,8 @@ package com.michaelyogar.pokemonreviewsystem.domain;
 
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,8 +14,18 @@ public class Pokemon {
 
     private String name;
 
-    @CreatedDate
-    private Instant created_date;
+    @OneToMany(mappedBy = "pokemon", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
+
+    public void addReview(Review review) {
+        reviews.add(review);
+        review.setPokemon(this);
+    }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+        review.setPokemon(null);
+    }
 
     public Long getPokemonId() {
         return pokemon_id;
@@ -34,6 +43,7 @@ public class Pokemon {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "pokemon", orphanRemoval = true, cascade = CascadeType.ALL)
-    public List<Review> reviews;
+    public List<Review> getReviews() {
+        return reviews;
+    }
 }

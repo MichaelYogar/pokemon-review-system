@@ -2,20 +2,32 @@ package com.michaelyogar.pokemonreviewsystem.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Reviewer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long reviewer_id;
+    private long reviewer_id;
 
-    public String firstName;
+    private String firstName;
 
-    public String lastName;
+    private String lastName;
 
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
+
+    public void addReview(Review review) {
+        reviews.add(review);
+        review.setReviewer(this);
+    }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+        review.setReviewer(null);
+    }
+
 
     public long getReviewerId() {
         return reviewer_id;
@@ -39,5 +51,9 @@ public class Reviewer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
     }
 }

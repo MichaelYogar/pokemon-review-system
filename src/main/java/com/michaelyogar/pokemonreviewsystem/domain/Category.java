@@ -10,9 +10,9 @@ import jakarta.persistence.Id;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long category_id;
+    private long category_id;
 
-    public String name;
+    private String name;
 
     public long getCategoryId() {
         return category_id;
